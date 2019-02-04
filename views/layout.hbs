@@ -9,16 +9,17 @@
 </head>
 <body>
 
-  {{!-- TODO: Display "Login/Signup/My rooms" only if not connected --}}
-  {{!-- TODO: Display "Logout" only if connected --}}
   <nav>
     <a href="/">Home</a>
-    <a href="/auth/login">Login</a>
-    <a href="/auth/signup">Signup</a>
-    <a href="/auth/logout">Logout</a>
     <a href="/rooms">All rooms</a>
-    <a href="/add-room">Add room</a>
-    <a href="/my-rooms">My rooms</a>
+    {{#if isConnected}}
+      <a href="/add-room">Add room</a>
+      <a href="/my-rooms">My rooms</a>
+      <a href="/auth/logout">Logout</a>
+    {{else}}
+      <a href="/auth/login">Login</a>
+      <a href="/auth/signup">Signup</a>
+    {{/if}}
   </nav>
 
   {{{body}}}
