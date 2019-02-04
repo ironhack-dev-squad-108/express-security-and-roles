@@ -1,7 +1,7 @@
 const express = require('express');
 const router  = express.Router();
 const Room = require('../models/Room')
-const { isConnected } = require('../middlewares')
+const { isConnected, checkAdmin, checkRole } = require('../middlewares')
 
 
 router.get('/', (req, res, next) => {
@@ -45,6 +45,18 @@ router.get('/my-rooms', isConnected, (req,res,next)=>{
   .catch(next)
 })
 
+router.get('/admin/rooms', 
+  // checkAdmin, 
+  checkRole('ADMIN'),
+  (req,res,next)=>{
+    Room.find()
+    .populate('_owner')
+    .then(rooms => {
+      res.render('rooms', {rooms})
+    })
+    .catch(next)
+  }
+)
 
 
 module.exports = router;

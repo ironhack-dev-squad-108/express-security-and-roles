@@ -122,3 +122,14 @@ router.get('/my-rooms', (req,res,next)=>{
 module.exports = router;
 
 ```
+
+
+## Role
+
+### Step 1
+Create a field `role` in `models/User.js`
+
+### Step 2
+Create a middleware `checkAdmin` and protect the root with this middleware.
+
+Or you can also create a middleware `checkRole`.
